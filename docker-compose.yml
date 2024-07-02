@@ -1,9 +1,13 @@
-version: '3.9'
-
 services:
   nextapp:
-    container_name: nextapp
-    image: francescoxx/nextapp
-    build: .
+    container_name: ip
+    image: mn/ip
+    build:
+      context: .
+      args:
+        MODE: ${MODE:-prod}  # Use the MODE environment variable or default to 'prod'
     ports:
       - "3000:3000"
+    environment:
+      - MODE=${MODE:-prod}  # Set the MODE environment variable at runtime
+      - NODE_ENV=production
